@@ -18,7 +18,9 @@ class BarBody extends BodyComponent with ContactCallbacks, KeyboardHandler {
   bool _hit = false;
   bool _barBack = false;
 
-  BarBody() : super() {
+  Vector2 position;
+
+  BarBody(this.position) : super() {
     renderBody = true;
   }
 
@@ -33,8 +35,8 @@ class BarBody extends BodyComponent with ContactCallbacks, KeyboardHandler {
   @override
   Body createBody() {
     final shape = PolygonShape()..setAsBoxXY(2, 14);
-    final bodyDef = BodyDef(
-        position: Vector2.all(10), type: BodyType.kinematic, userData: this);
+    final bodyDef =
+        BodyDef(position: position, type: BodyType.kinematic, userData: this);
     FixtureDef fixtureDef =
         FixtureDef(shape, friction: 1, density: 1, restitution: 0);
     return world.createBody(bodyDef)..createFixture(fixtureDef);
@@ -42,7 +44,7 @@ class BarBody extends BodyComponent with ContactCallbacks, KeyboardHandler {
 
   @override
   bool onKeyEvent(RawKeyEvent event, Set<LogicalKeyboardKey> keysPressed) {
-    if (!_hit && keysPressed.contains(LogicalKeyboardKey.space)) {
+    if (!_hit /*&& keysPressed.contains(LogicalKeyboardKey.space)*/) {
       _hit = true;
       // body.setTransform(body.position, math.pi / 2);
     }

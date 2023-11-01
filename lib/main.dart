@@ -20,7 +20,7 @@ class MyGame extends Forge2DGame
 
   @override
   FutureOr<void> onLoad() {
-    world.add(BarBody());
+    // world.add(BarBody());
     world.add(BallBody());
     world.addAll(createBoundaries(this));
 
