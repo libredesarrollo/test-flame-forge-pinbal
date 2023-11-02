@@ -12,7 +12,7 @@ class CircleBody extends BodyComponent {
   Body createBody() {
     final shape = CircleShape()..radius = size;
     final bodyDef =
-        BodyDef(position: position, type: BodyType.dynamic, userData: this);
+        BodyDef(position: position, type: BodyType.static, userData: this);
     FixtureDef fixtureDef =
         FixtureDef(shape, friction: 1, density: 5, restitution: 0);
     return world.createBody(bodyDef)..createFixture(fixtureDef);
@@ -31,7 +31,7 @@ class RectangleBody extends BodyComponent {
   Body createBody() {
     final shape = PolygonShape()..setAsBoxXY(size.x, size.y);
     final bodyDef =
-        BodyDef(position: position, type: BodyType.dynamic, userData: this);
+        BodyDef(position: position, type: BodyType.static, userData: this);
     FixtureDef fixtureDef =
         FixtureDef(shape, friction: 1, density: 5, restitution: 0);
     return world.createBody(bodyDef)..createFixture(fixtureDef);
