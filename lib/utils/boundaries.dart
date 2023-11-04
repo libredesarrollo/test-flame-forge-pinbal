@@ -1,6 +1,7 @@
 import 'package:flame/extensions.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:testpinball/components/bar_body.dart';
+import 'package:testpinball/utils/meta.dart';
 
 List<BodyComponent> createBoundaries(Forge2DGame game, {double? strokeWidth}) {
   final visibleRect = game.camera.visibleWorldRect;
@@ -10,7 +11,7 @@ List<BodyComponent> createBoundaries(Forge2DGame game, {double? strokeWidth}) {
   final bottomLeft = visibleRect.bottomLeft.toVector2();
 
   return [
-    Wall(topLeft, topRight, strokeWidth: strokeWidth),
+    // Wall(topLeft, topRight, strokeWidth: strokeWidth),
     Wall(topRight, bottomRight, strokeWidth: strokeWidth),
 
     //Wall(bottomLeft, bottomRight, strokeWidth: strokeWidth),
@@ -20,7 +21,8 @@ List<BodyComponent> createBoundaries(Forge2DGame game, {double? strokeWidth}) {
 
     //Wall(bottomLeft, bottomRight, strokeWidth: strokeWidth),
     Wall(topLeft, bottomLeft, strokeWidth: strokeWidth),
-    BarBody(Vector2(bottomRight.x * .7, bottomRight.y))
+    BarBody(Vector2(bottomRight.x * .7, bottomRight.y)),
+    createMeta(game, strokeWidth: 2),
   ];
 }
 

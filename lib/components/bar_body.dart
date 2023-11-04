@@ -44,7 +44,7 @@ class BarBody extends BodyComponent with ContactCallbacks, KeyboardHandler {
 
   @override
   bool onKeyEvent(RawKeyEvent event, Set<LogicalKeyboardKey> keysPressed) {
-    if (!_hit /*&& keysPressed.contains(LogicalKeyboardKey.space)*/) {
+    if (!_hit && keysPressed.contains(LogicalKeyboardKey.space)) {
       _hit = true;
       // body.setTransform(body.position, math.pi / 2);
     }
