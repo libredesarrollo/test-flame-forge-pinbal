@@ -16,7 +16,9 @@ BodyComponent createMeta(Forge2DGame game, {double? strokeWidth}) {
 class Meta extends BodyComponent {
   final Vector2 start;
   final Vector2 end;
+  late final Vector2 gameSize;
   final double strokeWidth;
+  int fact = 50;
 
   Meta(this.start, this.end, {double? strokeWidth})
       : strokeWidth = strokeWidth ?? 1;
@@ -35,5 +37,19 @@ class Meta extends BodyComponent {
     paint.strokeWidth = strokeWidth;
 
     return world.createBody(bodyDef)..createFixture(fixtureDef);
+  }
+
+  @override
+  Future<void> onLoad() {
+    gameSize = game.screenToWorld(camera.viewport.size);
+    return super.onLoad();
+  }
+
+  @override
+  void update(double dt) {
+    if (body.position.x > gameSize.x || body.position.x < -gameSize.x)
+      fact *= -1;
+    body.setTransform(Vector2(body.position.x + fact * dt, body.position.y), 0);
+    super.update(dt);
   }
 }

@@ -55,7 +55,7 @@ class BarBody extends BodyComponent with ContactCallbacks, KeyboardHandler {
   @override
   void update(double dt) {
     // if (_hit) {
-    print(body.angle);
+    // print(body.angle);
     if (_elapseTimeToHit < _timeToHit && _hit && !_barBack) {
       _elapseTimeToHit += dt * _speedBar;
       body.angularVelocity = math.pi * 3;
