@@ -15,6 +15,7 @@ class BarBody extends BodyComponent with ContactCallbacks, KeyboardHandler {
   double _elapseTimeToHit = 0;
   final double _timeToHit = 1;
   final double _speedBar = 5;
+  int _barDirection = 1;
   bool _hit = false;
   bool _barBack = false;
 
@@ -44,8 +45,14 @@ class BarBody extends BodyComponent with ContactCallbacks, KeyboardHandler {
 
   @override
   bool onKeyEvent(RawKeyEvent event, Set<LogicalKeyboardKey> keysPressed) {
-    if (!_hit && keysPressed.contains(LogicalKeyboardKey.space)) {
+    if (!_hit && keysPressed.contains(LogicalKeyboardKey.arrowRight)) {
       _hit = true;
+      _barDirection = 1;
+      // body.setTransform(body.position, math.pi / 2);
+    }
+    if (!_hit && keysPressed.contains(LogicalKeyboardKey.arrowLeft)) {
+      _hit = true;
+      _barDirection = -1;
       // body.setTransform(body.position, math.pi / 2);
     }
 
@@ -54,8 +61,8 @@ class BarBody extends BodyComponent with ContactCallbacks, KeyboardHandler {
 
   @override
   void update(double dt) {
-    // if (_hit) {
-    // print(body.angle);
+    /*
+    
     if (_elapseTimeToHit < _timeToHit && _hit && !_barBack) {
       _elapseTimeToHit += dt * _speedBar;
       body.angularVelocity = math.pi * 3;
@@ -70,6 +77,39 @@ class BarBody extends BodyComponent with ContactCallbacks, KeyboardHandler {
       body.angularVelocity = -math.pi * 3;
       // body.setTransform(body.position, math.pi * _elapseTimeToHit / 2);
     } else if (body.angle <= 0 && _hit) {
+      _hit = false;
+      _barBack = false;
+      _elapseTimeToHit = 0;
+      body.setTransform(body.position, 0);
+      body.angularVelocity = 0;
+    }
+     */
+    // if (_hit) {
+    // print(body.angle);
+    if (_elapseTimeToHit < _timeToHit && _hit && !_barBack) {
+      _elapseTimeToHit += dt * _speedBar;
+      body.angularVelocity = math.pi * 3 * _barDirection;
+      // body.setTransform(body.position, math.pi * _elapseTimeToHit / 2);
+
+      if (_elapseTimeToHit >= _timeToHit) {
+        _barBack = true;
+      }
+    } else if (body.angle * _barDirection > 0 && _barBack) {
+      // XXXXX
+      _barBack = true;
+
+      if (_barDirection == -1) {
+        _elapseTimeToHit -= dt * _speedBar;
+        body.angularVelocity = math.pi * 3;
+
+        // // // //         _elapseTimeToHit -= dt * _speedBar;
+        // // // // body.angularVelocity = -math.pi * 3;
+      } else {
+        _elapseTimeToHit -= dt * _speedBar;
+        body.angularVelocity = -math.pi * 3;
+      }
+      // body.setTransform(body.position, math.pi * _elapseTimeToHit / 2);
+    } else if (body.angle != 0 && _hit) {
       _hit = false;
       _barBack = false;
       _elapseTimeToHit = 0;
