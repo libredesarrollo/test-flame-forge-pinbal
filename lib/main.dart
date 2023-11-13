@@ -26,7 +26,7 @@ class MyGame extends Forge2DGame
   FutureOr<void> onLoad() {
     // world.add(BarBody());
     world.add(BallBody());
-    world.addAll(createBoundaries(this));
+    world.addAll(createBoundaries(this, type: 2));
 
     _addObstacles();
 
@@ -37,10 +37,12 @@ class MyGame extends Forge2DGame
     for (var o in level.getCurrentLevel(level: _currentLevel)) {
       switch (o.typeObstacle) {
         case level.TypeObstacle.box:
-          world.add(RectangleBody(position: o.position, size: o.size));
+          world.add(
+              RectangleBody(position: screenToWorld(o.position), size: o.size));
           break;
         case level.TypeObstacle.circle:
-          world.add(CircleBody(position: o.position, size: o.size.x));
+          world.add(
+              CircleBody(position: screenToWorld(o.position), size: o.size.x));
           break;
       }
     }

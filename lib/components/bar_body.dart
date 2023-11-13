@@ -20,8 +20,9 @@ class BarBody extends BodyComponent with ContactCallbacks, KeyboardHandler {
   bool _barBack = false;
 
   Vector2 position;
+  Vector2 size;
 
-  BarBody(this.position) : super() {
+  BarBody(this.position, this.size) : super() {
     renderBody = true;
   }
 
@@ -35,7 +36,7 @@ class BarBody extends BodyComponent with ContactCallbacks, KeyboardHandler {
 
   @override
   Body createBody() {
-    final shape = PolygonShape()..setAsBoxXY(2, 14);
+    final shape = PolygonShape()..setAsBoxXY(size.x, size.y);
     final bodyDef =
         BodyDef(position: position, type: BodyType.kinematic, userData: this);
     FixtureDef fixtureDef =

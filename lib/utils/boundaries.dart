@@ -19,7 +19,7 @@ List<BodyComponent> createBoundaries(Forge2DGame game,
             Vector2(bottomRight.x * .7, bottomRight.y),
             strokeWidth: strokeWidth),
         Wall(topLeft, bottomLeft, strokeWidth: strokeWidth),
-        BarBody(Vector2(bottomRight.x * .7, bottomRight.y)),
+        BarBody(Vector2(bottomRight.x * .7, bottomRight.y), Vector2(2, 14)),
         createMeta(game, strokeWidth: 2),
       ];
     default:
@@ -32,7 +32,7 @@ List<BodyComponent> createBoundaries(Forge2DGame game,
             Vector2(bottomRight.x, bottomRight.y - 10),
             strokeWidth: strokeWidth), // side right
         Wall(topLeft, bottomLeft, strokeWidth: strokeWidth),
-        BarBody(Vector2(0, bottomRight.y)),
+        BarBody(Vector2(0, bottomRight.y), Vector2(2, bottomRight.x * .3)),
         createMeta(game, strokeWidth: 2),
       ];
   }
